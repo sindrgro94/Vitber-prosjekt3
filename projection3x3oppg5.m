@@ -2,7 +2,8 @@ function projection3x3oppg5()
     im1 = [0 0 0; 0 1 0; 0 0 0];
     pRows = sum(im1,2); %radprojeksjoner
     pCol = sum(im1,1); %kolonneprojeksjoner
-    pPi4 = im1(1,1)+im1(2,2)+im1(3,3);
+    pPi4(1) = im1(1,2)+im1(2,3)+;
+    pPi4(2) = im1(1,1)+im1(2,2)+im1(3,3);
     p3Pi4 = im1(1,3)+im1(2,2)+im1(3,1);
     projIm1 = zeros(3);
     %%Deler ut Verdiene:
@@ -20,7 +21,7 @@ function projection3x3oppg5()
     totalSum = sum(sum(projIm1));
     projIm1 = projIm1/totalSum;
     disp(sum(projIm1));
-    disp(sum(sum(projIm1)));
+    disp(projIm1);
     h = figure; imagesc(projIm1), colormap('gray'), axis square, drawnow;
     %saveTightFigure(h,'oppg5');
 end
