@@ -1,0 +1,7 @@
+function projMatrix = makeProjectionNxN(Matrix,sizeN,thetaN)
+projMatrix = zeros(sizeN-1,thetaN);
+    for i = 1:sizeN-1
+        sm(i) = -(sizeN
+    end
+
+end
