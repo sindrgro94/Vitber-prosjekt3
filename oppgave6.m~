@@ -1,4 +1,4 @@
-function [sinogram, countCheck] = oppgave6 (matrix)
+function sinogram = oppgave6 (matrix)
 %  testMatrix = create16x16filled4x4center(N);
 %  matrix = testMatrix
  N = length(matrix);
@@ -11,7 +11,7 @@ function [sinogram, countCheck] = oppgave6 (matrix)
  x = zeros(1,N);
  sm = zeros(1,numDiags);
  sinogram = zeros(numDiags,length(theta));
- countCheck = zeros(numDiags,length(theta));
+ countCheck(numDiags,length(theta))
  y = x;
  a = 1;
  for u = 1: N
