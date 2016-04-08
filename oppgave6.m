@@ -1,15 +1,16 @@
-function oppgave6 (matrix, N)
- testMatrix = create16x16filled4x4center(N);
- matrix = testMatrix;
+function sinogram = oppgave6 (matrix)
+%  testMatrix = create16x16filled4x4center(N);
+%  matrix = testMatrix
+ N = length(matrix);
  numDiags = 2*N - 1;
  nTheta = 360;
  dTheta = pi/nTheta; %%=0.5*
- theta = 0:dTheta:(pi);
+ theta = 0:dTheta:(pi-dTheta);
  
  
  x = zeros(1,N);
  sm = zeros(1,numDiags);
- projMat = zeros(numDiags,length(theta));
+ sinogram = zeros(numDiags,length(theta));
  y = x;
  a = 1;
  for u = 1: N
@@ -23,14 +24,15 @@ function oppgave6 (matrix, N)
  end
  
  for thetaIter = 1:nTheta
+     disp(thetaIter)
     for m = 1:numDiags
         sUpper = sm(m)+a/2;
         sLower = sm(m)-a/2;
         for i = 1:N
             for j = 1:N
             s = sFunc(x(i),y(j),theta(thetaIter));
-            if s > sLower && s < sUpper
-                projMat(m,thetaIter) = projMat(m,thetaIter) + matrix(i,j);
+            if s >= sLower && s <= sUpper
+                sinogram(m,thetaIter) = sinogram(m,thetaIter) + matrix(i,j);
             end
             
             end
@@ -41,12 +43,12 @@ function oppgave6 (matrix, N)
  
          
  
- figure;
- imagesc(projMat);
-%imagesc(im1);
-colormap('gray');
-axis square;
-drawnow;
+%  figure;
+%  imagesc(sinogram);
+% %imagesc(im1);
+% colormap('gray');
+% axis square;
+% drawnow;
 end
 
 
