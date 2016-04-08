@@ -12,5 +12,6 @@ function projection3x3()
         projIm1(:,i) = projIm1(:,i)+ p1/6;
         projIm1(i,:) = projIm1(i,:)+ p2/6;
     end
-    figure, imagesc(projIm1), colormap('gray'), axis square, drawnow;
+    h = figure, imagesc(projIm1), colormap('gray'), axis square, drawnow;
+    %saveTightFigure(h,'oppg4');
 end
