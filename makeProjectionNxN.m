@@ -25,6 +25,8 @@ function projMatrix = makeProjectionNxN(matrix,sizeN,nTheta)
             end
         end
     end
+    h = figure; imagesc(projMatrix), colormap('gray'), axis square, drawnow;
+    %saveTightFigure(h,'oppg5');
 end
 
 function S=sline(x,y,theta)
