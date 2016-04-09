@@ -35,8 +35,8 @@ M = (numDiags+1)/2;
                 
                 if s >= sLower && s <= sUpper
                     output(i,j) = output(i,j) + sinogram(m,thetaIter);
-                  
                 end
+                
                 
             end
           
