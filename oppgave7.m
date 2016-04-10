@@ -2,45 +2,55 @@ function [output] = oppgave7(sinogram)
 %  testMatrix = create16x16filled4x4center(N);
 %  matrix = testMatrix
 [numDiags,nTheta] = size(sinogram);
-M = (numDiags+1)/2;
+N = (numDiags+1)/2;
  dTheta = pi/nTheta; %%=0.5*
  theta = 0:dTheta:(pi-dTheta);
  
- 
- x = zeros(1,M);
+ x = zeros(1,N);
  sm = zeros(1,numDiags);
- output = zeros(M,M);
+ output = zeros(N,N);
  y = x;
  a = 1;
- for u = 1: M
-     x(u) = ((2*u-M-1)/2)*a;
-     y(u) = ((2*u-M-1)/2)*a;
+ for u = 1: N
+     x(u) = ((2*u-N-1)/2)*a;
+     y(u) = ((2*u-N-1)/2)*a;
  end
  
 
  for m = 1:numDiags
-     sm(m) = -(M-m)*a/sqrt(2);
+     sm(m) = -(N-m)*a/sqrt(2);
  end
  
 
  for thetaIter = 1:nTheta
      disp(thetaIter)
     for m = 1:numDiags
-        sUpper = sm(m)+a/sqrt(2);
-        sLower = sm(m)-a/sqrt(2);
-      
-        for i = 1:M  
-            for j = 1:M
+        sUpper = sm(m)+a/(2*sqrt(2));
+        sLower = sm(m)-a/(2*sqrt(2));
+        M = 0;
+        Pos = zeros(2,1);
+        for i = 1:N  
+            for j = 1:N
                 s = sFunc(x(i),y(j),theta(thetaIter));
                 
                 if s >= sLower && s <= sUpper
-                    output(i,j) = output(i,j) + sinogram(m,thetaIter);
+                    M = M + 1;
+                    Pos(1,M) = i;
+                    Pos(2,M) = j;
                 end
                 
                 
             end
           
         end
+         if sum(sum(Pos)) ~= 0
+            for i = 1:length(Pos(1,:))
+             
+                    output(Pos(1,i),Pos(2,i)) = output(Pos(1,i),Pos(2,i)) + sinogram(m,thetaIter)/M;
+          
+            end
+         end
+        
     end
  end
  

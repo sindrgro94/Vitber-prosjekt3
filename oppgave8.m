@@ -1,12 +1,13 @@
 function oppgave8()
 
 for i = 1:11
+    tic
     if i < 10
         name = sprintf('sinogram0%i.txt',i);
     else 
         name = sprintf('sinogram%i.txt',i);
     end
-    
+    disp(i)
     sinogram = load(name);
     directBackwardsProjection = oppgave7(sinogram);
     
@@ -18,13 +19,15 @@ for i = 1:11
     drawnow;
     
      if i < 10
-        name = sprintf('sinogram0%i.pdf',i);
+        name = sprintf('directBackProjection0%i.pdf',i);
     else 
-        name = sprintf('sinogram%i.pdf',i);
+        name = sprintf('directBackProjection%i.pdf',i);
      end
     
     saveTightFigure(h,name);
     close all;
+    timer = toc;
+    fprintf('\nEstimated time left: %i min',timer*(11-i)/60);
 end
 end
         

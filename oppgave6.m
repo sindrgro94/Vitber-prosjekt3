@@ -26,8 +26,8 @@ function sinogram = oppgave6 (matrix)
  for thetaIter = 1:nTheta
      disp(thetaIter)
     for m = 1:numDiags
-        sUpper = sm(m)+a/sqrt(2);
-        sLower = sm(m)-a/sqrt(2);
+        sUpper = sm(m)+a/(2*sqrt(2));
+        sLower = sm(m)-a/(2*sqrt(2));
         for i = 1:N
             for j = 1:N
             s = sFunc(x(i),y(j),theta(thetaIter));
