@@ -1,4 +1,0 @@
-function directtBackwardsProjection(sinogram)
-
-
-end
