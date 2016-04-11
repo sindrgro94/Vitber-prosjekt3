@@ -1,8 +1,5 @@
-%For å få en sirkel i sentrum
-%Oppgave 9
-%denne skal ta inn en sinogram og gjøre det skarpere
-function oppgave9hoypass(mikkelsen)
-
+%Oppgave 9 filter
+function oppgave9filter(mikkelsen)
 close all
 %Normaliserer matrisen for å få frem et ok bilde 
 [N,M]=size(mikkelsen);
@@ -22,13 +19,14 @@ fftB = fftshift(fftA);
 
 %Setter verdier i sentrum lik null
 [N,M]=size(fftA);
-R = 100;
 senter = floor((M)/2)+1;
 
-for i = 1:length(mikkelsen)
-    for j = 1:length(mikkelsen)
-        if (i-senter)^2+(j-senter)^2 > R^2
-            fftB(i,j)=fftB(i,j)*0;
+for R = 0::180
+    for i = 1:length(mikkelsen)
+        for j = 1:length(mikkelsen)
+            if R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
+                fftB(i,j) = fftB(i,j)*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
+            end
         end
     end
 end
@@ -53,3 +51,9 @@ figure, imshow(real(sexyImageC)), colormap gray
 title('Image C  med normalisering')
 end
 
+            
+            
+            
+            
+            
+            

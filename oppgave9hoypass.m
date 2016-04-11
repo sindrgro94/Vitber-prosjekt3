@@ -24,7 +24,7 @@ fftB = fftshift(fftA);
 [N,M]=size(fftA);
 R = 100;
 senter = floor((M)/2)+1;
-fftBHoy = zeros(size(mikkelsen));
+
 for i = 1:length(mikkelsen)
     for j = 1:length(mikkelsen)
         if (i-senter)^2+(j-senter)^2 > R^2
