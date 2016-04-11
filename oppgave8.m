@@ -27,7 +27,7 @@ for i = 1:11
     saveTightFigure(h,name);
     close all;
     timer = toc;
-    fprintf('\nEstimated time left: %i min',timer*(11-i)/60);
+    fprintf('\nEstimated time left: %.0f min',timer*(11-i)/60);
 end
 end
         
