@@ -1,4 +1,4 @@
-function [output] = oppgave7(sinogram)
+function [output] = oppgave7(sinogram,originalImage)
 %  testMatrix = create16x16filled4x4center(N);
 %  matrix = testMatrix
 [numDiags,nTheta] = size(sinogram);
@@ -58,13 +58,23 @@ N = (numDiags+1)/2;
          
  
  figure;
+ if nargin == 2;
+ subplot(1,2,1);
+ end
  imagesc(output);
 %imagesc(im1);
 colormap('gray');
 axis square;
 drawnow;
-end
 
+if nargin == 2;
+    subplot(1,2,2);
+    imagesc(originalImage);
+    colormap('gray');
+    axis square;
+    drawnow;
+end
+end
 
 function u =  sFunc(x,y,theta)
     u = x*cos(theta)+y*sin(theta);
