@@ -4,9 +4,8 @@ function [output] = oppgave7(sinogram,originalImage)
 N = (numDiags+1)/2;
 name = sprintf('posmN%0.fnTheta%.0f.mat',N,nTheta);
 output = zeros(N,N);
-
  
-if exist(name,'file') %sjekk om fila med data om projeksjonslinjene finnes
+if exist(['Projeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
      load(name); %innholder matrisene posm og Mval
 else %%ellers lag ny fil
      identifySCoordsAndSavePosmAndMval(N,nTheta); %%definert nederst i denne filen
@@ -37,11 +36,11 @@ axis square;
 drawnow;
 
 if nargin == 2; %%plot originalbildet DERSOM det er to argumenter inn i hovedfunksjonen
-    subplot(1,2,2);
-    imagesc(originalImage);
-    colormap('gray');
-    axis square;
-    drawnow;
+subplot(1,2,2);
+imagesc(originalImage);
+colormap('gray');
+axis square;
+drawnow;
 end
 end
 
