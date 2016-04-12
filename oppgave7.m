@@ -101,5 +101,7 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
 
  end
      name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
-    save(name,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
+    save(['Projeksjonsmatriser\' name] ,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
+                                                        %i mappa
+                                                        %'Projeksonsmatriser'
 end
