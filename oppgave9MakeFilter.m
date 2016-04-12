@@ -38,6 +38,10 @@ for i = 1:N
     end
 end
 
+differanse = (F(128,:)-G(128,:));
+figure;
+plot(1:256,real(F(128,:)-G(128,:)))
+
 H = zeros(N,N);
 for i = 1:N
     for j = 1:N
