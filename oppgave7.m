@@ -4,9 +4,9 @@ function [output] = oppgave7(sinogram,originalImage)
 N = (numDiags+1)/2;
 name = sprintf('posmN%0.fnTheta%.0f.mat',N,nTheta);
 output = zeros(N,N);
- 
+
 if exist(['Projeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
-     load(name); %innholder matrisene posm og Mval
+     load(name); % -- ! VIKTIG ! -- innholder matrisene posm og Mval
 else %%ellers lag ny fil
      identifySCoordsAndSavePosmAndMval(N,nTheta); %%definert nederst i denne filen
      load(name); %innholder matrisene posm og Mval

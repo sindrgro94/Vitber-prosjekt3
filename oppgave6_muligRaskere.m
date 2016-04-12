@@ -22,7 +22,6 @@ function sinogram = oppgave6_muligRaskere (matrix)
  end
  
  for thetaIter = 1:nTheta
-     disp(thetaIter)
         for i = 1:N
             for j = 1:N
                 Sxy = sFunc(x(i),y(j),theta(thetaIter));

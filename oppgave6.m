@@ -1,6 +1,9 @@
-function sinogram = oppgave6 (matrix)
-%  testMatrix = create16x16filled4x4center(N);
-%  matrix = testMatrix
+function sinogram = oppgave6 (matrix,saveName)
+% matrix [N x N matrix] er bildet som skal scannes til et sinogram
+% saveName [string]  (optional) spesifiserer hva navnet på .txt-filen skal være
+% (OBS! Ikke inkluder '.txt' i saveName, KUN en streng med navnet du
+% ønsker.
+
  N = length(matrix);
  numDiags = 2*N - 1;
  nTheta = 180;
@@ -49,6 +52,13 @@ function sinogram = oppgave6 (matrix)
 % colormap('gray');
 % axis square;
 % drawnow;
+
+if nargin == 2;
+vname=@(x) inputname(1);
+sinogramString = vname(sinogram);
+saveNameTxt = sprintf([saveName '.txt']);
+save (['sinogram\' saveNameTxt],sinogramString, '-ascii')  ;
+end
 end
 
 
