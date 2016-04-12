@@ -3,7 +3,7 @@ function oppgave9filter(mikkelsen)
 %close all
 %fantom = load('phantom256backprojected.mat');
 %filter = oppgave9MakeFilter(fantom.phantom256);
-close all
+%close all
 %Normaliserer matrisen for å få frem et ok bilde 
 [N,M]=size(mikkelsen);
 mellom = ones(N,M).*min(min(mikkelsen));
@@ -23,25 +23,40 @@ fftB = fftshift(fftA);
 [N,M]=size(fftA);
 senter = floor((M)/2)+1;
 
-vB = 4;
-vL = 50;
-hB = 4;
-hL = 50;
-% fftB(1:vL,128-vB/2:128+vB/2) = fftB(1:vL,128-vB/2:128+vB/2)*0;
-% fftB(256-vL+1:256,128-vB/2:128+vB/2) = fftB(256-vL+1:256,128-vB/2:128+vB/2)*0;
-% fftB(128-hB/2:128+hB/2,1:hL) = fftB(128-hB/2:128+hB/2,1:hL)*0;
-% fftB(128-hB/2:128+hB/2,256-hL+1:256) = fftB(128-hB/2:128+hB/2,256-hL+1:256)*0;
+vB = 8;
+vL = 120;
+hB = 8;
+hL = 120;
+% fftB(1:vL,128-vB/2:128+vB/2) = fftB(1:vL,128-vB/2:128+vB/2)*0.1;
+% fftB(256-vL+1:256,128-vB/2:128+vB/2) = fftB(256-vL+1:256,128-vB/2:128+vB/2)*0.1;
+% fftB(128-hB/2:128+hB/2,1:hL) = fftB(128-hB/2:128+hB/2,1:hL)*0.1;
+% fftB(128-hB/2:128+hB/2,256-hL+1:256) = fftB(128-hB/2:128+hB/2,256-hL+1:256)*0.1;
 filtrert = ifft2(ifftshift(fftB));
 figure, imshow(fftB), title('Litt filter')
+% m = 1;
+% for i = (1+m):(256-m)
+%     for k = -m:1:m
+%     fftB(i+k,i+k)= fftB(i+k,i+k)*0;
+%     end
+% end
+% 
+% for i = (1+m):(256-m)
+%     for k = -m:1:m
+%     fftB(i+k,257-i+k)= fftB(i+k,257-i+k)*0;
+%     end
+% end
+
 
 %figure, imshow(filtrert), title('Litt filtrert uten normalisering')
 
-
+k = 1.5;
 for R = 0:1:181
     for i = 1:length(mikkelsen)
         for j = 1:length(mikkelsen)
-            if R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
-                 fftB(i,j) = fftB(i,j)*1.5*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
+            if R<15 && R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
+                 fftB(i,j) = fftB(i,j)*0.5*k*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
+            elseif R>=15 && R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
+                 fftB(i,j) = fftB(i,j)*k*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
              end
         end
     end

@@ -23,14 +23,14 @@ fftB = fftshift(fftA);
 [N,M]=size(fftA);
 senter = floor((M)/2)+1;
 
-vB = 4;
-vL = 50;
-hB = 4;
-hL = 50;
-% fftB(1:vL,128-vB/2:128+vB/2) = fftB(1:vL,128-vB/2:128+vB/2)*0;
-% fftB(256-vL+1:256,128-vB/2:128+vB/2) = fftB(256-vL+1:256,128-vB/2:128+vB/2)*0;
-% fftB(128-hB/2:128+hB/2,1:hL) = fftB(128-hB/2:128+hB/2,1:hL)*0;
-% fftB(128-hB/2:128+hB/2,256-hL+1:256) = fftB(128-hB/2:128+hB/2,256-hL+1:256)*0;
+vB = 8;
+vL = 120;
+hB = 8;
+hL = 120;
+% fftB(1:vL,128-vB/2:128+vB/2) = fftB(1:vL,128-vB/2:128+vB/2)*0.1;
+% fftB(256-vL+1:256,128-vB/2:128+vB/2) = fftB(256-vL+1:256,128-vB/2:128+vB/2)*0.1;
+% fftB(128-hB/2:128+hB/2,1:hL) = fftB(128-hB/2:128+hB/2,1:hL)*0.1;
+% fftB(128-hB/2:128+hB/2,256-hL+1:256) = fftB(128-hB/2:128+hB/2,256-hL+1:256)*0.1;
 filtrert = ifft2(ifftshift(fftB));
 figure, imshow(fftB), title('Litt filter')
 
@@ -40,7 +40,9 @@ figure, imshow(fftB), title('Litt filter')
 for R = 0:1:181
     for i = 1:length(mikkelsen)
         for j = 1:length(mikkelsen)
-            if R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
+            if R<15 && R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
+                 fftB(i,j) = fftB(i,j)*sin(pi/30*R)*1.5*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
+            elseif R>=15 && R^2 < (i-senter)^2+(j-senter)^2 && (i-senter)^2+(j-senter)^2 <= (R+1)^2
                  fftB(i,j) = fftB(i,j)*1.5*R; %%%DETTE ER BARE ANTAGELSER TIL FILTER
              end
         end
