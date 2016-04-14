@@ -4,15 +4,17 @@ function sinogram = oppgave6 (matrix,saveName)
 % (OBS! Ikke inkluder '.txt' i saveName, KUN en streng med navnet du
 % ?nsker.
 
+%dersom du kjører OSX vil koden trolig ta lang tid. Dette er fordi Matlab 
+%ikke finner filen spesifisert ved stien i linje 17.
 
- N = length(matrix);
- numDiags = 2*N - 1;
- nTheta = 180;
- dTheta = pi/nTheta; %%=0.5*
- theta = 0:dTheta:(pi-dTheta);
+N = length(matrix);
+numDiags = 2*N - 1;
+nTheta = 180;
+dTheta = pi/nTheta; %%=0.5*
+theta = 0:dTheta:(pi-dTheta);
  
 name = sprintf('posmN%0.fnTheta%.0f.mat',N,nTheta);
-if exist(['Tilbakeprojeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
+if exist(['Projeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
      load(name); % -- ! VIKTIG ! -- innholder matrisen posm
 else %%ellers lag ny fil
      identifySCoordsAndSavePosmAndMval(N,nTheta); %%definert nederst i denne filen
@@ -35,18 +37,13 @@ for thetaIter = 1:nTheta %% plass?r de utsmurte punktene langs projeksjonslinjen
 end
 
 sinogram = sinogram./sum(sum(sinogram));
-    
  
- 
-         
- 
-h= figure;
- imagesc(sinogram);
-%imagesc(im1);
+h = figure;
+imagesc(sinogram);
 colormap('gray');
 axis square;
 drawnow;
-saveThightFigurenr2(h,'sinogramPlotPhantom');
+saveTightFigurenr2(h,'sinogramFigurePhantom.pdf');
 
 if nargin == 2;
 vname=@(x) inputname(1);
@@ -111,8 +108,8 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
     end
 
  end
-     name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
-    save(['Tilbakeprojeksjonsmatriser\' name] ,'posm'); %%lagre fila med info om alle p(s_m,theta_n)
+    name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
+    save(['Projeksjonsmatriser\' name] ,'posm'); %%lagre fila med info om alle p(s_m,theta_n)
                                                         %i mappa
                                                         %'Projeksonsmatriser'
 end
