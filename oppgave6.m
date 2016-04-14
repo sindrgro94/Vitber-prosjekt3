@@ -4,54 +4,49 @@ function sinogram = oppgave6 (matrix,saveName)
 % (OBS! Ikke inkluder '.txt' i saveName, KUN en streng med navnet du
 % ønsker.
 
+
  N = length(matrix);
  numDiags = 2*N - 1;
  nTheta = 180;
  dTheta = pi/nTheta; %%=0.5*
  theta = 0:dTheta:(pi-dTheta);
  
- 
- x = zeros(1,N);
- sm = zeros(1,numDiags);
- sinogram = zeros(numDiags,length(theta));
- y = x;
- a = 1;
- for u = 1: N
-     x(u) = ((2*u-N-1)/2)*a;
-     y(u) = ((2*u-N-1)/2)*a;
- end
- 
+name = sprintf('posmN%0.fnTheta%.0f.mat',N,nTheta);
+if exist(['Tilbakeprojeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
+     load(name); % -- ! VIKTIG ! -- innholder matrisen posm
+else %%ellers lag ny fil
+     identifySCoordsAndSavePosmAndMval(N,nTheta); %%definert nederst i denne filen
+     load(name); %innholder matrisen posm
+end
 
- for m = 1:numDiags
-     sm(m) = -(N-m)*a/sqrt(2);
- end
+ sinogram = zeros(numDiags,length(theta));
  
- for thetaIter = 1:nTheta
-     disp(thetaIter)
+for thetaIter = 1:nTheta %% plass?r de utsmurte punktene langs projeksjonslinjene
     for m = 1:numDiags
-        sUpper = sm(m)+a/(2*sqrt(2));
-        sLower = sm(m)-a/(2*sqrt(2));
-        for i = 1:N
-            for j = 1:N
-            s = sFunc(x(i),y(j),theta(thetaIter));
-            if s >= sLower && s <= sUpper
-                sinogram(m,thetaIter) = sinogram(m,thetaIter) + matrix(i,j);
-            end
+        for i = 1:N  
+            if posm(2*m-1,thetaIter,i) ~=0
+                sinogram(m,thetaIter) = sinogram(m,thetaIter) + matrix(posm(2*m-1,thetaIter,i),posm(2*m,thetaIter,i));
+            else
+                break
+            end  
             
-            end
         end
     end
- end
+end
+
+sinogram = sinogram./sum(sum(sinogram));
+    
  
  
          
  
-%  figure;
-%  imagesc(sinogram);
-% %imagesc(im1);
-% colormap('gray');
-% axis square;
-% drawnow;
+h= figure;
+ imagesc(sinogram);
+%imagesc(im1);
+colormap('gray');
+axis square;
+drawnow;
+%saveThightFigurenr2(h,'filnavn');
 
 if nargin == 2;
 vname=@(x) inputname(1);
@@ -77,7 +72,7 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
  %%holder koordinatparene (x_i,y_i) i henholdvis (2*i-1,2*i) for gitt
  %%Theta_n og S_i med tilhørende telling for alle punkter langs
  %%p(s_i,Theta_N)
- Mval = zeros(numDiags,nTheta); %%holder M-verdiene for gitt m, Theta_n
+ 
  x = zeros(1,N);
  sm = zeros(1,numDiags);
  y = x;
@@ -117,7 +112,7 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
 
  end
      name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
-    save(['Projeksjonsmatriser\' name] ,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
+    save(['Tilbakeprojeksjonsmatriser\' name] ,'posm'); %%lagre fila med info om alle p(s_m,theta_n)
                                                         %i mappa
                                                         %'Projeksonsmatriser'
 end

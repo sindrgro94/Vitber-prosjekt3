@@ -17,7 +17,10 @@ for thetaIter = 1:nTheta %% plass?r de utsmurte punktene langs projeksjonslinjen
         for i = 1:N  
             if posm(2*m-1,thetaIter,i) ~=0
                 output(posm(2*m-1,thetaIter,i),posm(2*m,thetaIter,i)) = output(posm(2*m-1,thetaIter,i),posm(2*m,thetaIter,i)) + sinogram(m,thetaIter)/Mval(m,thetaIter);
-            end   
+            else
+                break
+            end  
+            
         end
     end
 end
@@ -41,11 +44,11 @@ imagesc(originalImage);
 colormap('gray');
 axis square;
 drawnow;
-end
 %%regner ut rms-avvik per piksel.
 rms = CalculateRMSvalue(originalImage,output);
 fprintf('RMS-avviket per piksel er:\n');
 disp(rms);
+end
 end
 
 function u =  sFunc(x,y,theta) %%regner ut s_ij
