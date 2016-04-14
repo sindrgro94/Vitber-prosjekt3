@@ -118,7 +118,7 @@ function rms = CalculateRMSvalue(originalImage,backProjectedImage)
                 rms = rms+(backProjectedImage(x,y)-originalImage(x,y))^2;
             end
         end
-        rms = sqrt(rms)/N^2;
+        rms = sqrt(rms/N^2);
     else
         rms = -1;
     end
