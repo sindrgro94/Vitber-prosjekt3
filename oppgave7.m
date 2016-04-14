@@ -5,7 +5,7 @@ N = (numDiags+1)/2;
 name = sprintf('posmN%0.fnTheta%.0f.mat',N,nTheta);
 output = zeros(N,N);
 
-if exist(['Projeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
+if exist(['Tilbakeprojeksjonsmatriser\' name],'file') %sjekk om fila med data om projeksjonslinjene finnes
      load(name); % -- ! VIKTIG ! -- innholder matrisene posm og Mval
 else %%ellers lag ny fil
      identifySCoordsAndSavePosmAndMval(N,nTheta); %%definert nederst i denne filen
@@ -104,11 +104,10 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
 
  end
      name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
-    save(['Projeksjonsmatriser\' name] ,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
+    save(['Tilbakeprojeksjonsmatriser\' name] ,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
                                                         %i mappa
                                                         %'Projeksonsmatriser'
 end
-
 function rms = CalculateRMSvalue(originalImage,backProjectedImage)
     if size(originalImage) == size(backProjectedImage)
         originalImage = originalImage/sum(sum(originalImage));
