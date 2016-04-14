@@ -1,8 +1,8 @@
 function sinogram = oppgave6 (matrix,saveName)
 % matrix [N x N matrix] er bildet som skal scannes til et sinogram
-% saveName [string]  (optional) spesifiserer hva navnet på .txt-filen skal være
+% saveName [string]  (optional) spesifiserer hva navnet p? .txt-filen skal v?re
 % (OBS! Ikke inkluder '.txt' i saveName, KUN en streng med navnet du
-% ønsker.
+% ?nsker.
 
 
  N = length(matrix);
@@ -46,7 +46,7 @@ h= figure;
 colormap('gray');
 axis square;
 drawnow;
-%saveThightFigurenr2(h,'filnavn');
+saveThightFigurenr2(h,'sinogramPlotPhantom');
 
 if nargin == 2;
 vname=@(x) inputname(1);
@@ -62,7 +62,7 @@ function u =  sFunc(x,y,theta)
 end
 
 function identifySCoordsAndSavePosmAndMval(N,nTheta)
- %denne funksjonen avgjør hvilke punkter (i,j) <-> (x,y) som ligger langs
+ %denne funksjonen avgj?r hvilke punkter (i,j) <-> (x,y) som ligger langs
  %en gitt projekson P(s_m,Theta_n)
  numDiags = 2*N-1;
  dTheta = pi/nTheta; %%steg for Theta (0.5 deg for nTheta = 180)
@@ -70,7 +70,7 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
  
  posm = zeros(2*numDiags,nTheta, N);
  %%holder koordinatparene (x_i,y_i) i henholdvis (2*i-1,2*i) for gitt
- %%Theta_n og S_i med tilhørende telling for alle punkter langs
+ %%Theta_n og S_i med tilh?rende telling for alle punkter langs
  %%p(s_i,Theta_N)
  
  x = zeros(1,N);
