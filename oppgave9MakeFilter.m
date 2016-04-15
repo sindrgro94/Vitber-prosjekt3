@@ -48,10 +48,11 @@ figure;
 plot(1:256,real(F(128,:)-G(128,:)))
 
 H = zeros(N,N);
+k = 1;
 for i = 1:N
     for j = 1:N
         if j < 131 && j >126
-            H(i,j) = sqrt((127-i)^2+(127-j)^2)*G(i,j)*0.5;
+            H(i,j) = sqrt((127-i)^2+(127-j)^2)*G(i,j);
         else
             H(i,j)= k*sqrt((127-i)^2+(127-j)^2)*G(i,j);
         end
@@ -69,8 +70,8 @@ subplot(2,2,1), imshow(F), title('Original');
 subplot(2,2,2), imshow(G), title('Projeksjon');
 subplot(2,2,3), imshow(H), title('Filtrert');
 
-imageC = ifft2(ifftshift(H));
-figure, imagesc(real(imageC),[0.5,3]), axis square, colormap gray
+imageC = ifft2(ifftshift(H)); %DETTE ER DEN FILTRERTE PHANTOM MATRISEN SINDRE!
+figure, imagesc(real(imageC),[0.5,4]), axis square, colormap gray
 title('Image C  uten normalisering')
 
 
