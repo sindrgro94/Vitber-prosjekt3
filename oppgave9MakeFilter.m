@@ -1,5 +1,5 @@
 %her lager vi filteret
-function imageC = oppgave9MakeFilter(fantom,phantom)
+function oppgave9MakeFilter(fantom)
 close all
 [M,N] = size(fantom);
 skarp = phantom(M);
@@ -70,7 +70,7 @@ subplot(2,2,1), imshow(F), title('Original');
 subplot(2,2,2), imshow(G), title('Projeksjon');
 subplot(2,2,3), imshow(H), title('Filtrert');
 
-imageC = ifft2(ifftshift(H)); %DETTE ER DEN FILTRERTE PHANTOM MATRISEN SINDRE!
+imageC = ifft2(ifftshift(H));
 figure, imagesc(real(imageC),[0.5,4]), axis square, colormap gray
 title('Image C  uten normalisering')
 
