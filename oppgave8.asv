@@ -1,25 +1,16 @@
 function oppgave8()
 
-%For å kjøre denne, MÅ "current folder" (kommando "pwd" i MATLAB)
-%være "...\Vitber-prosjekt3\", samt at alle undermapper i denne mappen
-%er en del av "current path".
-%får du feil ved "saveTightFigurenr2.m", er trolig dette feilen.
 try 
-    cd('Vitber-prosjekt3');
-catch
-    %%fortsett kjøring, du er trolig allerede inne i 
-    %mappa som du skal.
-end
+    
 
-
-for i = 1:11
+for i = 11:11
     tic
     if i < 10
         name = sprintf('sinogram0%i.txt',i);
     else 
         name = sprintf('sinogram%i.txt',i);
     end
-    fprintf('Jobber med bilde %.0f/11\n',i);
+    disp(i)
     sinogram = load(name);
     directBackwardsProjection = oppgave7(sinogram);
     
@@ -36,10 +27,10 @@ for i = 1:11
         name = sprintf('directBackProjection%i.pdf',i);
      end
     
-    saveTightFigure(h,['Tilbakeprojiseringer\' name]);
+    saveTightFigure(h,['Projeksjonsmatriser\' name]);
     close all;
     timer = toc;
-    fprintf('\nEstimated time left: %.0f min\n',timer*(11-i)/60);
+    fprintf('\nEstimated time left: %.0f min',timer*(11-i)/60);
 end
 end
         
