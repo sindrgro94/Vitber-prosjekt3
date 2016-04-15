@@ -1,9 +1,9 @@
 %her lager vi filteret
-function oppgave9MakeFilter(fantom)
+function imageC = oppgave9MakeFilter(fantom,phantom)
 close all
 [M,N] = size(fantom);
 skarp = phantom(M);
-%Normaliserer matrisen for å få frem et ok bilde 
+%Normaliserer matrisen for ? f? frem et ok bilde 
 mellom = ones(N,M).*min(min(fantom));
 ny = fantom-mellom;
 fantom = ny./max(max(ny));
@@ -26,7 +26,7 @@ Glog = log(abs(G));
 
 
 
-% %for å teste om den fungere
+% %for ? teste om den fungere
 % diff = Flog-Glog;
 % figure, imshow(diff,[0 5]), colormap gray;
 
