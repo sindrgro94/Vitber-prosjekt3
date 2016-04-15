@@ -69,7 +69,7 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
  %%holder koordinatparene (x_i,y_i) i henholdvis (2*i-1,2*i) for gitt
  %%Theta_n og S_i med tilh?rende telling for alle punkter langs
  %%p(s_i,Theta_N)
- 
+ Mval = zeros(numDiags,nTheta);
  x = zeros(1,N);
  sm = zeros(1,numDiags);
  y = x;
@@ -104,12 +104,12 @@ function identifySCoordsAndSavePosmAndMval(N,nTheta)
             end
           
         end
-        
+         Mval(m,thetaIter) = M; %%etter telling, finn M for p(s_m,Theta_n);
     end
 
  end
     name = sprintf('posmN%.0fnTheta%0.f.mat',N,nTheta);
-    save(['Projeksjonsmatriser\' name] ,'posm'); %%lagre fila med info om alle p(s_m,theta_n)
+    save(['Projeksjonsmatriser\' name] ,'posm','Mval'); %%lagre fila med info om alle p(s_m,theta_n)
                                                         %i mappa
                                                         %'Projeksonsmatriser'
 end
