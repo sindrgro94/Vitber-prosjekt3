@@ -24,7 +24,7 @@ for i = 1:11
         name = sprintf('directBackProjection%i.pdf',i);
      end
     
-    saveTightFigure(h,name);
+    saveTightFigure(h,['Tilbakeprojiseringer\' name]);
     close all;
     timer = toc;
     fprintf('\nEstimated time left: %.0f min',timer*(11-i)/60);
