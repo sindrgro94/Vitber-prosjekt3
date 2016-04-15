@@ -1,6 +1,5 @@
 %her lager vi filteret
-function filter = oppgave9MakeFilter(fantom)
-
+function oppgave9MakeFilter(fantom)
 close all
 [M,N] = size(fantom);
 skarp = phantom(M);
@@ -12,19 +11,20 @@ fantom = ny./max(max(ny));
 mellom = ones(N,M).*min(min(skarp));
 ny = skarp-mellom;
 skarp = ny./max(max(ny));
-figure, imshow(abs(skarp)), colormap gray
-title('Skarp')
-figure, imshow(abs(fantom)), colormap gray
-title('Projeksjon')
+figure, imagesc(abs(skarp),[0,1]), axis square ,colormap gray
+title('Normalisert')
+% figure, imshow(abs(fantom)), colormap gray
+% title('Projeksjon')
 
 F = fftshift(fft2(double(skarp)));
 G = fftshift(fft2(double(fantom)));
 
 Flog = log(abs(F));
 Glog = log(abs(G));
-figure;
-subplot(1,2,1), imagesc(Flog,[-2,10]), axis square, colorbar, title('skarp');
-subplot(1,2,2), imagesc(Glog,[-2,10]), axis square, colorbar, title('fantom');
+% subplot(1,2,1), imagesc(Flog,[-2,10]), axis square, colorbar, title('skarp');
+% subplot(1,2,2), imagesc(Glog,[-2,10]), axis square, colorbar, title('fantom');
+
+
 
 % %for å teste om den fungere
 % diff = Flog-Glog;
@@ -38,19 +38,39 @@ for i = 1:N
     end
 end
 
-differanse = (F(128,:)-G(128,:));
+
+figure;
+[X,Y] = meshgrid(1:N,1:N);
+surf(X,Y,abs(filter))
+zlim([0,1000]);
+
 figure;
 plot(1:256,real(F(128,:)-G(128,:)))
 
 H = zeros(N,N);
 for i = 1:N
     for j = 1:N
-        H(i,j)= filter(i,j)*G(i,j);
+        if j < 131 && j >126
+            H(i,j) = sqrt((127-i)^2+(127-j)^2)*G(i,j)*0.5;
+        else
+            H(i,j)= k*sqrt((127-i)^2+(127-j)^2)*G(i,j);
+        end
     end
 end
 
+figure;
+[X,Y] = meshgrid(1:N,1:N);
+surf(X,Y,abs(F./H))
+zlim([0,1000]);
+
+
+figure;
+subplot(2,2,1), imshow(F), title('Original');
+subplot(2,2,2), imshow(G), title('Projeksjon');
+subplot(2,2,3), imshow(H), title('Filtrert');
+
 imageC = ifft2(ifftshift(H));
-figure, imshow(abs(imageC)), colormap gray
+figure, imagesc(real(imageC),[0.5,3]), axis square, colormap gray
 title('Image C  uten normalisering')
 
 
