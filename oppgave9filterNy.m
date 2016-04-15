@@ -23,7 +23,7 @@ k = 1;
     for i = 1:length(tilbakeProjeksjon)
         for j = 1:length(tilbakeProjeksjon)
             if j < 131 && j >126
-                 fftB(i,j) = 1*fftB(i,j)*k*(sqrt((i-senter)^2+(j-senter)^2)); %%%DETTE ER BARE ANTAGELSER TIL FILTER 
+                 fftB(i,j) = fftB(i,j)*k*(sqrt((i-senter)^2+(j-senter)^2)); %%%DETTE ER BARE ANTAGELSER TIL FILTER 
             else
                  fftB(i,j) = fftB(i,j)*k*(sqrt((i-senter)^2+(j-senter)^2)); %%%DETTE ER BARE ANTAGELSER TIL FILTER 
             end

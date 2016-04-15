@@ -1,13 +1,13 @@
 %For å få en sirkel i sentrum
 %Oppgave 9
-%denne skal ta inn en tilbakeprojeksjon og legge til et lavpassfilter
-function oppgave9lavpass(tilbakeProjeksjon)
+%denne skal ta inn en sinogram og gjøre det skarpere
+function oppgave9lavpass(mikkelsen)
 
 close all
 %Normaliserer matrisen for å få frem et ok bilde 
-[N,M]=size(tilbakeProjeksjon);
-mellom = ones(N,M).*min(min(tilbakeProjeksjon));
-ny = tilbakeProjeksjon-mellom;
+[N,M]=size(mikkelsen);
+mellom = ones(N,M).*min(min(mikkelsen));
+ny = mikkelsen-mellom;
 imageA = ny./max(max(ny));
 
 
@@ -21,8 +21,8 @@ fftC = fftB;
 [N,M]=size(fftA);
 R = 10;
 senter = floor((M)/2)+1;
-for i = 1:length(tilbakeProjeksjon)
-    for j = 1:length(tilbakeProjeksjon)
+for i = 1:length(mikkelsen)
+    for j = 1:length(mikkelsen)
         if (i-senter)^2+(j-senter)^2 < R^2
             fftB(i,j)=fftB(i,j)*0;
         end
@@ -40,7 +40,7 @@ ny1 = imageC-mellom1;
 NormImageC = ny1./max(max(ny1));
 
 
-%Plotter originalbilder mot filtrerte bilder
+
 figure;
 subplot(1,2,2),imagesc((NormImageC),[0,1]),axis square, colormap gray, title('Høypassfilter')
 subplot(1,2,1),imagesc(imageA,[0,1]), axis square, colormap gray,title('Original')
