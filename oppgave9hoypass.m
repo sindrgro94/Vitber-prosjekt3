@@ -42,12 +42,12 @@ NormImageC = ny1./max(max(ny1));
 
 
 %Plotter originalbilder mot filtrerte bilder
-figure;
-subplot(1,2,2),imagesc((NormImageC),[0,1]),axis square, colormap gray, title('Høypassfilter')
-subplot(1,2,1),imagesc(imageA,[0,1]), axis square, colormap gray,title('Original')
+h = figure;
+subplot(2,2,2),imagesc((NormImageC),[0,1]),axis square, colormap gray, title('Høypassfilter')
+subplot(2,2,1),imagesc(imageA,[0,1]), axis square, colormap gray,title('Original')
+subplot(2,2,4),imagesc(abs(fftB),[0 1]),axis square, colormap gray, title('Fourier med høypassfilter') 
+subplot(2,2,3),imagesc(abs(fftC),[0 1]),axis square, colormap gray, title('Fourier uten høypassfilter')
+saveTightFigurenr2(h,'Høypass');
 
-figure;
-subplot(1,2,2),imagesc(abs(fftB),[0 10]),axis square, colormap gray, title('Med høypassfilter') 
-subplot(1,2,1),imagesc(abs(fftC),[0 10]),axis square, colormap gray, title('Uten høypassfilter')
 end
 

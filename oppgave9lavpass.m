@@ -41,12 +41,11 @@ NormImageC = ny1./max(max(ny1));
 
 
 %Plotter originalbilder mot filtrerte bilder
-figure;
-subplot(1,2,2),imagesc((NormImageC),[0,1]),axis square, colormap gray, title('Høypassfilter')
-subplot(1,2,1),imagesc(imageA,[0,1]), axis square, colormap gray,title('Original')
-
-figure;
-subplot(1,2,2),imagesc(abs(fftB),[0 10]),axis square, colormap gray, title('Med lavpassfilter') 
-subplot(1,2,1),imagesc(abs(fftC),[0 10]),axis square, colormap gray, title('Uten lavpassfilter')
+h = figure;
+subplot(2,2,2),imagesc((NormImageC),[0,1]),axis square, colormap gray, title('Lavpassfilter')
+subplot(2,2,1),imagesc(imageA,[0,1]), axis square, colormap gray,title('Original')
+subplot(2,2,4),imagesc(abs(fftB),[0 1]),axis square, colormap gray, title('Fourier med lavpassfilter') 
+subplot(2,2,3),imagesc(abs(fftC),[0 1]),axis square, colormap gray, title('Fourier uten lavpassfilter')
+saveTightFigurenr2(h,'Lavpass');
 end
 
