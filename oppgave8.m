@@ -39,7 +39,7 @@ for i = 1:11
     saveTightFigure(h,['Tilbakeprojiseringer\' name]);
     close all;
     timer = toc;
-    fprintf('\nEstimated time left: %.0f min\n',timer*(11-i)/60);
+    fprintf('\nEstimated time left: %.0f min og %0.f sek\n',timer*(11-i)/60,mod(timer*(11-i),60));
 end
 end
         
