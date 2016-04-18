@@ -5,7 +5,7 @@ function oppgave8()
 %er en del av "current path".
 %får du feil ved "saveTightFigurenr2.m", er trolig dette feilen.
 try 
-    cd('Vitber-prosjekt3');
+    cd('Vitber-prosjekt3-master');
 catch
     %%fortsett kjøring, du er trolig allerede inne i 
     %mappa som du skal.
