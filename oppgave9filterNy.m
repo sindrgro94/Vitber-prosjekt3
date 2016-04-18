@@ -22,7 +22,7 @@ senter = floor((M)/2)+1;
 k = 1;
     for i = 1:length(tilbakeProjeksjon)
         for j = 1:length(tilbakeProjeksjon)
-            fftB(i,j) = fftB(i,j)*k*(sqrt((i-senter)^2+(j-senter)^2)); %%%DETTE ER BARE ANTAGELSER TIL FILTER 
+            fftB(i,j) = fftB(i,j)*k*(sqrt((i-senter)^2+(j-senter)^2));
         end
     end
 
