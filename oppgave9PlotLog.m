@@ -1,5 +1,5 @@
 %her lager vi filteret
-function oppgave9MakeFilter(fantom)
+function oppgave9PlotLog(fantom)
 close all
 [M,N] = size(fantom);
 skarp = phantom(M);
