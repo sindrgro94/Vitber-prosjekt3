@@ -32,7 +32,7 @@ filtrertNy = ifft2(ifftshift(fftB*2));
 
 %Illustrerer resultatet
 h = figure;
-subplot(1,2,2),imagesc(real(filtrertNy),[-2,1]),axis square, colormap gray, title('Filtrert linneært')
+subplot(1,2,2),imagesc(real(filtrertNy),[-2,1]),axis square, colormap gray, title('Filtrert lineært')
 subplot(1,2,1),imagesc(imageA), axis square, colormap gray,title('Original')
 % figure;
 % subplot(1,2,1),imagesc(real(fftshift(fftA))),axis square, colormap gray, title('Original Fourier')
