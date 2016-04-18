@@ -21,8 +21,8 @@ G = fftshift(fft2(double(fantom)));
 Flog = log(abs(F));
 Glog = log(abs(G));
 h = figure;
-subplot(1,2,1), imagesc(Flog,[-2,15]), colorbar, title('Original'), axis square;
-subplot(1,2,2), imagesc(Glog,[-2,15]), colorbar, title('Projeksjon'),axis square;
+subplot(1,2,1), imagesc(Flog,[0,5]), colormap('gray'), title('Original'), axis square;
+subplot(1,2,2), imagesc(Glog,[0,5]), colormap('gray'), title('Projeksjon'),axis square;
 saveTightFigurenr2(h,'log');
 
 
