@@ -32,6 +32,7 @@ figure; %%start plottingen
 if nargin == 2; %%dersom originalbildet er inkludert, lag subplot, ellers plot vanlig.
  subplot(1,2,1);
 end
+figure;
  imagesc(output);
 %imagesc(im1);
 colormap('gray');
